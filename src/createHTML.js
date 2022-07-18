@@ -13,26 +13,36 @@ let htmlFileString =
     <header>
         <h1>My Team</h1>
     </header>
-    <main class="container">`;
+    <main class="container" style="display:flex; flex-wrap:wrap;">`;
 
 const addMemberHTML = function(data) {
+    let color = '';
+    let lastField = '';
+    if(data.getRole() === 'Manager') {
+        color = 'text-bg-info';
+        lastField = `
+        <li class="list-group-item">Office Number: ${data.getOfficeNumber()}</li>`;
+    } else if(data.getRole() === 'Engineer') {
+        color = 'text-bg-danger';
+        lastField = `
+        <li class="list-group-item">Github: <a href="https://github.com/${data.getGithub()}" target="_blank">${data.getGithub()}</a></li>`;
+    } else if(data.getRole() === 'Intern') {
+        color = 'text-bg-success';
+        lastField = `
+        <li class="list-group-item">School: ${data.getSchool()} </li>`;
+    }
     let card =
-    `<div class="card">
-        <div class="card-header">
+    `
+    <div class="card" style="margin:20px;">
+        <div class="card-header ${color}">
             ${data.getName()}<br>${data.getRole()}
         </div>
-        <ul class="list-group list-group-flush>
+        <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${data.getId()}</li>
-            <li class="list-group-item">Email: <a href="mailto: ${data.getEmail()}">${data.getEmail()}</a></li>`
-    if(data.getRole() === 'Manager') {
-        card += `<li class="list-group-item">Office Number: ${data.getOfficeNumber()}</li>`;
-    } else if(data.getRole() === 'Engineer') {
-        card += `<li class="list-group-item">Github: <a href="https://github.com/${data.getGithub()}" target="_blank">${data.getGithub()}</a></li>`;
-    } else if(data.getRole() === 'Intern') {
-        card += `<li class="list-group-item">School: ${data.getSchool()} </li>`;
-    }
+            <li class="list-group-item">Email: <a href="mailto: ${data.getEmail()}">${data.getEmail()}</a></li>
+            ${lastField}`;
     card +=
-    `   </ul>
+    `</ul>
     </div>`;
     htmlFileString += card;
 }

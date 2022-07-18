@@ -30,6 +30,7 @@ const addEngineer = function() {
         //make object
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
         htmlCreator.addMemberHTML(engineer);
+        addMember();
     }).catch((error) => {
         if (error.isTtyError) {
             console.log("Prompt couldn't be rendered in current environment");
@@ -47,6 +48,7 @@ const addIntern = function() {
         //make object
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
         htmlCreator.addMemberHTML(intern);
+        addMember();
     }).catch((error) => {
         if (error.isTtyError) {
             console.log("Prompt couldn't be rendered in current environment");
@@ -64,6 +66,14 @@ const addMember = function() {
     let input = '';
     inquirer.prompt(questions.selectEngineerIntern).then((answers) => {
         input = answers.input;
+        console.log(input);
+        if(input === 'Engineer') {
+            addEngineer();
+        } else if(input === 'Intern') {
+            addIntern();
+        } else if(input === 'Done') {
+            outputHTML();
+        }
     }).catch((error) => {
         if (error.isTtyError) {
             console.log("Prompt couldn't be rendered in current environment");
@@ -72,17 +82,7 @@ const addMember = function() {
         else {
             console.log(error);
         }
-        input = 'Done';
     });
-    if(input === 'Engineer') {
-        addEngineer();
-        addMember();
-    } else if(input === 'Intern') {
-        addIntern();
-        addMember();
-    } else if(input === 'Done') {
-        outputHTML();
-    }
 }
 
 const outputHTML = function() {
