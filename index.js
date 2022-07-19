@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
 const questions = require('./src/questions');
-const htmlCreator = require('./src/createHTML');
-const fs = require('fs');
+const htmlHandler = require('./src/htmlHandler');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -11,7 +10,7 @@ const addManager = function() {
     inquirer.prompt(questions.managerQuestions).then((answers) => {
         //make object
         const manager = new Manager(answers.name, answers.id, answers.email, answers.office);
-        htmlCreator.addMemberHTML(manager);
+        htmlHandler.addMemberHTML(manager);
         addMember();
     }).catch((error) => {
         if (error.isTtyError) {
@@ -29,7 +28,7 @@ const addEngineer = function() {
     inquirer.prompt(questions.engineerQuestions).then((answers) => {
         //make object
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-        htmlCreator.addMemberHTML(engineer);
+        htmlHandler.addMemberHTML(engineer);
         addMember();
     }).catch((error) => {
         if (error.isTtyError) {
@@ -47,7 +46,7 @@ const addIntern = function() {
     inquirer.prompt(questions.internQuestions).then((answers) => {
         //make object
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
-        htmlCreator.addMemberHTML(intern);
+        htmlHandler.addMemberHTML(intern);
         addMember();
     }).catch((error) => {
         if (error.isTtyError) {
@@ -72,7 +71,7 @@ const addMember = function() {
         } else if(input === 'Intern') {
             addIntern();
         } else if(input === 'Done') {
-            outputHTML();
+            htmlHandler.outputHTML();
         }
     }).catch((error) => {
         if (error.isTtyError) {
@@ -82,17 +81,6 @@ const addMember = function() {
         else {
             console.log(error);
         }
-    });
-}
-
-const outputHTML = function() {
-    const output = htmlCreator.closeHTML();
-    fs.writeFile('./dist/index.html', output, error => {
-        if(error) {
-            console.log(error);
-            return;
-        }
-        console.log('success');
     });
 }
 
