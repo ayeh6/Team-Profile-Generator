@@ -17,7 +17,7 @@ let htmlFileString =
     </header>
     <main class="container" style="display:flex; flex-wrap:wrap;">`;
 
-const addMemberHTML = function(data) {
+const addMember = function(data) {
     let color = '';
     let lastField = '';
     if(data.getRole() === 'Manager') {
@@ -45,7 +45,7 @@ const addMemberHTML = function(data) {
     htmlFileString += card;
 }
 
-const closeHTML = function() {
+const close = function() {
     htmlFileString += 
     `
     </main>
@@ -54,15 +54,15 @@ const closeHTML = function() {
     return htmlFileString;
 }
 
-const outputHTML = function() {
-    const output = closeHTML();
+const output = function() {
+    const output = close();
     fs.writeFile('./dist/index.html', output, error => {
         if(error) {
             console.log(error);
             return;
         }
-        console.log('success');
+        console.log('Created html file in ./dist/index.html');
     });
 }
 
-module.exports = {addMemberHTML, closeHTML, outputHTML};
+module.exports = {addMember, output};
