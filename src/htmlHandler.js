@@ -11,9 +11,9 @@ let htmlFileString =
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link href="./style.css" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <h1>My Team</h1>
+<body style="background: #F8F0E3">
+    <header style="text-align: center;">
+        <h1 style="padding-top: 10px; padding-bottom: 10px; background: blue; color: white;">My Team</h1>
     </header>
     <main class="container" style="display:flex; flex-wrap:wrap;">`;
 
