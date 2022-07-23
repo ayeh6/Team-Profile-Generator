@@ -53,7 +53,7 @@ THEN I exit the application, and the HTML is generated
 
 ### Links
 
-- Github Repo: [Team Profile Generator](https://github.com/ayeh6/Team-Profile-Generator)
+- Solution URL: [Github Repository](https://github.com/ayeh6/Team-Profile-Generator)
 
 ## My process
 
